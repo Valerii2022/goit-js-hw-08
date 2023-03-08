@@ -17,6 +17,10 @@ function handleFormInput(event) {
 
 function handleFormSubmit(event) {
   event.preventDefault();
+  //   const currentStorageValue = JSON.parse(
+  //     localStorage.getItem(LOCALSTORAGE_FORM_KEY)
+  //   );
+  //   console.log(currentStorageValue);
   event.currentTarget.reset();
   localStorage.removeItem(LOCALSTORAGE_FORM_KEY);
 }
@@ -29,4 +33,4 @@ function populateInputFiels() {
     formRef.elements.message.value = parsedFormData.message || '';
     formRef.elements.email.value = parsedFormData.email || '';
   }
-} 
+}
