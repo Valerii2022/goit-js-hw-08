@@ -7,7 +7,7 @@ let formData = {};
 formRef.elements.email.required = true;
 formRef.elements.message.required = true;
 
-populateInputFiels();
+populateInputFields();
 
 formRef.addEventListener('input', throttle(handleFormInput, 500));
 formRef.addEventListener('submit', handleFormSubmit);
@@ -28,8 +28,7 @@ function handleFormSubmit(event) {
   localStorage.removeItem(LOCALSTORAGE_FORM_KEY);
 }
 
-function populateInputFiels() {
-  // const parsedFormData = JSON.parse(localStorage.getItem(LOCALSTORAGE_FORM_KEY));
+function populateInputFields() {
   if (JSON.parse(localStorage.getItem(LOCALSTORAGE_FORM_KEY))) {
     const parsedFormData = JSON.parse(localStorage.getItem(LOCALSTORAGE_FORM_KEY));
     formRef.elements.email.value = parsedFormData.email || '';
