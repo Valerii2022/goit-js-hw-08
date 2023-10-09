@@ -7,10 +7,10 @@ import { galleryItems } from './gallery-items';
 const galleryRef = document.querySelector('.gallery');
 
 const imageMarkup = galleryItems
-  .map(item => {
+  .map(({ original, preview, description }) => {
     return `
-   <a class="gallery__item" href="${item.original}">
-      <img class="gallery__image" src="${item.preview}" alt="${item.description}" />
+   <a class="gallery__item" href="${original}">
+      <img class="gallery__image" src="${preview}" alt="${description}" />
    </a>
    `;
   })

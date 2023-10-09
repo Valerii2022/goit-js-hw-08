@@ -4,8 +4,10 @@ const formRef = document.querySelector('.feedback-form');
 const LOCALSTORAGE_FORM_KEY = 'feedback-form-state';
 let formData = {};
 
-formRef.elements.email.required = true;
-formRef.elements.message.required = true;
+const { email, message } = formRef.elements;
+
+email.required = true;
+message.required = true;
 
 populateInputFields();
 
@@ -13,7 +15,11 @@ formRef.addEventListener('input', throttle(handleFormInput, 500));
 formRef.addEventListener('submit', handleFormSubmit);
 
 function handleFormInput(event) {
-  formData[event.target.name] = event.target.value;
+  if (event.target.name === 'email') {
+    formData.email = event.target.value;
+  } else {
+    formData.message = event.target.value;
+  }
   const stringifyFormData = JSON.stringify(formData);
   localStorage.setItem(LOCALSTORAGE_FORM_KEY, stringifyFormData);
 }
@@ -30,8 +36,12 @@ function handleFormSubmit(event) {
 
 function populateInputFields() {
   if (JSON.parse(localStorage.getItem(LOCALSTORAGE_FORM_KEY))) {
-    const parsedFormData = JSON.parse(localStorage.getItem(LOCALSTORAGE_FORM_KEY));
-    formRef.elements.email.value = parsedFormData.email || '';
-    formRef.elements.message.value = parsedFormData.message || '';
+    const parsedFormData = JSON.parse(
+      localStorage.getItem(LOCALSTORAGE_FORM_KEY)
+    );
+    email.value = parsedFormData.email || '';
+    message.value = parsedFormData.message || '';
+    formData.email = parsedFormData.email;
+    formData.message = parsedFormData.message;
   }
 }
